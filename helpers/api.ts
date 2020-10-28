@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-export const uri = process.env.BACKEND_URL || 'http://192.168.15.74:3535'
+export const uri = process.env.BACKEND_URL
 
 export interface Items {
   _id: string

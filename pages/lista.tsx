@@ -11,6 +11,9 @@ import { useRouter } from 'next/router'
 
 import { MdNewReleases } from 'react-icons/md'
 
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import Item from '../components/Item'
 import Logo from '../assets/logo.svg'
 import { getItems, Items, selectItem, unselectItem, uri } from '../helpers/api'
@@ -61,6 +64,9 @@ const ListView: React.FC = () => {
 
       setItems(newItems)
       selectItem(items[n]._id, localStorage.getItem('@phone') as string)
+      toast.info(
+        'Obrigado por selecionar este item 🎉 Lembrando que a cor preferêncial para os produtos é a cor vermelha ou preta.'
+      )
     }
   }
 
@@ -81,41 +87,44 @@ const ListView: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Head>
-        <title>{'Lista de Robson & Maria'}</title>
-      </Head>
-      <Header>
-        <Logo />
-        <NamesOfList>{'ROBSON & MARIA'}</NamesOfList>
-      </Header>
-      <SubHeaderOptions>
-        <h2>Lista de Presentes</h2>
-        <button onClick={() => router.push('/adicionar')}>Adicionar</button>
-      </SubHeaderOptions>
-      <ItemsList>
-        {loadingInitialRequest ? (
-          <ItemsLoading />
-        ) : items.length === 0 ? (
-          <EmptyElement />
-        ) : (
-          items.map((item, index) => (
-            <Item
-              onSelect={handleOnSelectItem(index)}
-              category={item.category || '👓 Utensílios'}
-              available={!item.selected}
-              name={item.name}
-              key={item.name}
-              onUnselect={handleOnUnselectItem(index)}
-              loading={item.loading}
-              selfSelected={
-                item.selected?.number === localStorage.getItem('@phone')
-              }
-            />
-          ))
-        )}
-      </ItemsList>
-    </Container>
+    <>
+      <Container>
+        <Head>
+          <title>{'Lista de Robson & Maria'}</title>
+        </Head>
+        <Header>
+          <Logo />
+          <NamesOfList>{'ROBSON & MARIA'}</NamesOfList>
+        </Header>
+        <SubHeaderOptions>
+          <h2>Lista de Presentes</h2>
+          <button onClick={() => router.push('/adicionar')}>Adicionar</button>
+        </SubHeaderOptions>
+        <ItemsList>
+          {loadingInitialRequest ? (
+            <ItemsLoading />
+          ) : items.length === 0 ? (
+            <EmptyElement />
+          ) : (
+            items.map((item, index) => (
+              <Item
+                onSelect={handleOnSelectItem(index)}
+                category={item.category || '👓 Utensílios'}
+                available={!item.selected}
+                name={item.name}
+                key={item.name}
+                onUnselect={handleOnUnselectItem(index)}
+                loading={item.loading}
+                selfSelected={
+                  item.selected?.number === localStorage.getItem('@phone')
+                }
+              />
+            ))
+          )}
+        </ItemsList>
+      </Container>
+      <ToastContainer />
+    </>
   )
 }
 

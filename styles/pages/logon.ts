@@ -113,7 +113,7 @@ export const SupportLink = styled.a`
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 21px;
   text-align: center;
   letter-spacing: 0.055em;

@@ -80,8 +80,9 @@ const AddList: React.FC = () => {
               Selecione...
             </option>
             <option value="🍴 Cozinha">🍴 Cozinha</option>
-            <option value="👓 Utensílios">👓 Utensílios</option>
+            <option value="🏷 Utensílios">👓 Utensílios</option>
             <option value="🛀🏽 Banheiro">🛀🏽 Banheiro</option>
+            <option value="🛋 Lazer">🛋 Lazer</option>
           </select>
           <ButtonSubmit
             disabled={category.length === 0 || name.length === 0}

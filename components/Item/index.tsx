@@ -27,12 +27,19 @@ const Item: React.FC<Props> = ({
   onUnselect,
   selfSelected
 }) => {
+  const reserve = !available && selfSelected
+  const soldOff = !available && !selfSelected
+
   return (
     <Container>
       <NameAndCategoryContainer>
         <h3>{name}</h3>
         <span>{category}</span>
-        <span>{available ? '✅ Disponível' : '❌ Esgotado'}</span>
+        <span>
+          {available && '✅ Disponível'}
+          {reserve && '😎 Reservado por você'}
+          {soldOff && '👥 Reservado por outra pessoa'}
+        </span>
       </NameAndCategoryContainer>
       <SelectButtonContainer loading={(loading && 'true') || 'false'}>
         {available && !selfSelected && (

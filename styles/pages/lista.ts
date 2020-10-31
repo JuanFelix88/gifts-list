@@ -20,20 +20,21 @@ const ShowTitleHeader = keyframes`
   }
 `
 
-export const Container = styled.li`
+export const Container = styled.div`
   display: flex;
   width: 100vw;
   flex-direction: column;
 `
 
 export const Header = styled.header`
-  background-color: ${p => p.theme.colors.yellow};
+  background: linear-gradient(180deg, #faedd0 60%, rgba(250, 237, 208, 0) 100%);
   width: 100vw;
   height: 70px;
   display: flex;
   padding: 10px 20px;
   align-items: center;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.18);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  justify-content: center;
 
   @media (min-width: 700px) {
     padding: 10px 18%;
@@ -59,10 +60,19 @@ export const NamesOfList = styled.h2`
   font-size: ${p => p.theme.sizes.title};
   line-height: 18px;
   letter-spacing: 0.055em;
-  margin-left: auto;
   color: ${p => p.theme.colors.text};
   text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
   animation: ${ShowTitleHeader} 850ms 1100ms ease backwards;
+`
+
+const ShowItemList = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  } to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 `
 
 export const ItemsList = styled.ul`
@@ -73,7 +83,7 @@ export const ItemsList = styled.ul`
   padding-top: 5px;
   flex-direction: column;
   align-items: center;
-  animation: ${ShowElement} 750ms 300ms ease backwards;
+  animation: ${ShowItemList} 750ms 950ms ease backwards;
   @media (min-width: 700px) {
     padding: 20px 18%;
   }
@@ -100,6 +110,28 @@ export const EmptyItems = styled.div`
   }
 `
 
+const ShowCategoryContext = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(8%);
+  } to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+`
+
+export const CategoryContext = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 10px 20px;
+  padding-top: 5px;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  animation: ${ShowCategoryContext} 620ms 700ms ease backwards;
+`
+
 export const SubHeaderOptions = styled.div`
   display: flex;
   padding: 15px 20px;
@@ -117,7 +149,7 @@ export const SubHeaderOptions = styled.div`
     font-family: Inter;
     font-style: normal;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 24px;
     line-height: 27px;
     display: flex;
     align-items: center;
@@ -131,8 +163,7 @@ export const SubHeaderOptions = styled.div`
   }
 
   > button {
-    background: #6a94ff;
-    box-shadow: 0px 1px 8px rgba(53, 60, 231, 0.36);
+    background: #fff;
     border-radius: 4px;
     font-family: Inter;
     font-style: normal;
@@ -144,8 +175,8 @@ export const SubHeaderOptions = styled.div`
     letter-spacing: 0.025em;
     border: none;
     margin-left: auto;
-    height: 30px;
-    padding: 5px;
+    height: 35px;
+    padding: 8px;
     cursor: pointer;
     transition: 0.15s ease;
 

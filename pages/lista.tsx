@@ -5,14 +5,17 @@ import {
   NamesOfList,
   ItemsList,
   SubHeaderOptions,
-  EmptyItems
+  EmptyItems,
+  CategoryContext
 } from '../styles/pages/lista'
 import { useRouter } from 'next/router'
 
-import { MdNewReleases } from 'react-icons/md'
+import { MdNewReleases, MdMoreHoriz } from 'react-icons/md'
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+
+import Searcher from '../components/Searcher'
 
 import Item from '../components/Item'
 import Logo from '../assets/logo.svg'
@@ -21,11 +24,16 @@ import Head from 'next/head'
 import io from 'socket.io-client'
 
 import ItemsLoading from '../components/ItemsLoading'
+import CategoryFilter from '../components/CategoryFilter'
+
+type Category = 'cozinha' | 'banheiro' | 'limpeza' | 'utensílios' | null
 
 const ListView: React.FC = () => {
   const [loadingInitialRequest, setLoadingInitialRequest] = useState(true)
   const [items, setItems] = useState<Items[]>([])
   const router = useRouter()
+  const [valueSearcher, setValueSearcher] = useState('')
+  const [categorySearch, setCategorySearch] = useState<Category>(null)
 
   useEffect(() => {
     getItems(localStorage.getItem('@phone') || 'all')
@@ -44,6 +52,10 @@ const ListView: React.FC = () => {
     if (phoneNumberIsNull) router.push('/')
   }, [])
 
+  useEffect(() => {
+    console.log(valueSearcher)
+  }, [valueSearcher])
+
   const EmptyElement = () => (
     <EmptyItems>
       <span>Não há itens para mostrar</span>
@@ -51,10 +63,10 @@ const ListView: React.FC = () => {
     </EmptyItems>
   )
 
-  function handleOnSelectItem(n: number) {
+  function handleOnSelectItem(n: string) {
     return () => {
-      const newItems = items.map((item, index) => {
-        if (index !== n) return item
+      const newItems = items.map(item => {
+        if (item._id !== n) return item
 
         return {
           ...item,
@@ -63,17 +75,17 @@ const ListView: React.FC = () => {
       })
 
       setItems(newItems)
-      selectItem(items[n]._id, localStorage.getItem('@phone') as string)
+      selectItem(n, localStorage.getItem('@phone') as string)
       toast.info(
         'Obrigado por selecionar este item 🎉 Lembrando que a cor preferêncial para os produtos é a cor vermelha ou preta.'
       )
     }
   }
 
-  function handleOnUnselectItem(n: number) {
+  function handleOnUnselectItem(n: string) {
     return () => {
-      const newItems = items.map((item, index) => {
-        if (index !== n) return item
+      const newItems = items.map(item => {
+        if (item._id !== n) return item
 
         return {
           ...item,
@@ -82,8 +94,19 @@ const ListView: React.FC = () => {
       })
 
       setItems(newItems)
-      unselectItem(items[n]._id, localStorage.getItem('@phone') as string)
+      unselectItem(n, localStorage.getItem('@phone') as string)
     }
+  }
+
+  function handleOnChangeSearcher(
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void {
+    setValueSearcher(event.target.value)
+  }
+
+  function handleOnChangeCategory(category: Category): void {
+    if (categorySearch === category) return setCategorySearch(null)
+    setCategorySearch(category)
   }
 
   return (
@@ -93,33 +116,81 @@ const ListView: React.FC = () => {
           <title>{'Lista de Robson & Maria'}</title>
         </Head>
         <Header>
-          <Logo />
           <NamesOfList>{'ROBSON & MARIA'}</NamesOfList>
         </Header>
         <SubHeaderOptions>
           <h2>Lista de Presentes</h2>
-          <button onClick={() => router.push('/adicionar')}>Adicionar</button>
+          <button onClick={() => router.push('/adicionar')}>
+            <MdMoreHoriz color="#404040" size={24} />
+          </button>
         </SubHeaderOptions>
+        <CategoryContext>
+          <CategoryFilter
+            onClick={() => handleOnChangeCategory('cozinha')}
+            selected={categorySearch === 'cozinha'}
+            category="cozinha"
+          />
+          <CategoryFilter
+            onClick={() => handleOnChangeCategory('banheiro')}
+            selected={categorySearch === 'banheiro'}
+            category="banheiro"
+          />
+          <CategoryFilter
+            onClick={() => handleOnChangeCategory('limpeza')}
+            selected={categorySearch === 'limpeza'}
+            category="limpeza"
+          />
+          <CategoryFilter
+            onClick={() => handleOnChangeCategory('utensílios')}
+            selected={categorySearch === 'utensílios'}
+            category="utensílios"
+          />
+        </CategoryContext>
+        <Searcher value={valueSearcher} onChange={handleOnChangeSearcher} />
         <ItemsList>
           {loadingInitialRequest ? (
             <ItemsLoading />
           ) : items.length === 0 ? (
             <EmptyElement />
           ) : (
-            items.map((item, index) => (
-              <Item
-                onSelect={handleOnSelectItem(index)}
-                category={item.category || '👓 Utensílios'}
-                available={!item.selected}
-                name={item.name}
-                key={item.name}
-                onUnselect={handleOnUnselectItem(index)}
-                loading={item.loading}
-                selfSelected={
-                  item.selected?.number === localStorage.getItem('@phone')
+            items
+              .filter(item => {
+                const testItemIsVisibleByCategorySelect =
+                  categorySearch === null ||
+                  item.category?.toLocaleLowerCase().indexOf(categorySearch) >=
+                    0
+
+                if (valueSearcher === '') {
+                  return testItemIsVisibleByCategorySelect
                 }
-              />
-            ))
+
+                const nameProduct = item.name.toLocaleLowerCase()
+
+                const categoryName = item.category?.toLocaleLowerCase()
+
+                const lowerSearchValue = valueSearcher.toLocaleLowerCase()
+
+                return (
+                  (testItemIsVisibleByCategorySelect &&
+                    categoryName &&
+                    categoryName.indexOf(lowerSearchValue) >= 0) ||
+                  nameProduct.indexOf(lowerSearchValue) >= 0
+                )
+              })
+              .map(item => (
+                <Item
+                  onSelect={handleOnSelectItem(item._id)}
+                  category={item.category || '👓 Utensílios'}
+                  available={!item.selected}
+                  name={item.name}
+                  key={item.name}
+                  onUnselect={handleOnUnselectItem(item._id)}
+                  loading={item.loading}
+                  selfSelected={
+                    item.selected?.number === localStorage.getItem('@phone')
+                  }
+                />
+              ))
           )}
         </ItemsList>
       </Container>

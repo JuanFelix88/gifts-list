@@ -19,9 +19,19 @@ const AnimationRotate = keyframes`
 `
 
 export const Container = styled.li`
-  background-color: ${p => p.theme.colors.background};
+  background: linear-gradient(
+    93.18deg,
+    #e7e7e7 11.14%,
+    rgba(231, 231, 231, 0.56) 54.83%,
+    #e7e7e7 90.01%
+  );
+  /* box-fine-line */
+
+  border: 1px solid #e3e3e3;
+  box-sizing: border-box;
+  border-radius: 6px;
   list-style: none;
-  box-shadow: 1px 2px 14px rgba(0, 0, 0, 0.19);
+  box-shadow: 1px 2px 14px rgba(0, 0, 0, 0.05);
   display: flex;
   width: 100%;
   min-height: 105px;
@@ -74,12 +84,21 @@ export const SelectButtonContainer = styled.div<SelectButtonProperties>`
   height: 100%;
 
   .danger {
-    background-color: #e33a3ab8;
+    background: #e33a3ab8;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      #e33a3ab8 43.75%,
+      #e33a3ab8 100%
+    );
     box-shadow: 0px 2px 12px #d13d4840;
   }
 
   button {
-    background: rgba(24, 226, 93, 0.72);
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(74, 228, 125, 0.4896) 43.75%,
+      rgba(74, 228, 125, 0.72) 100%
+    );
     box-shadow: 0px 2px 12px rgba(61, 209, 85, 0.25);
     border-radius: 6px;
     width: 64px;

@@ -8,7 +8,7 @@ export const Button = styled.button<ButtonProps>`
   cursor: pointer;
   width: 90px;
   min-width: 90px;
-  margin: 5px;
+  margin-right: 10px;
   height: 90px;
   ${p =>
     p.selected === 'true'

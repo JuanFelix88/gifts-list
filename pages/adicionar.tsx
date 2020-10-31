@@ -55,7 +55,7 @@ const AddList: React.FC = () => {
           <NamesOfList>{'ROBSON & MARIA'}</NamesOfList>
         </Header>
         <SubHeaderOptions>
-          <h2 style={{ maxWidth: 160 }}>Adicionar um novo item</h2>
+          <h2 style={{ maxWidth: 240 }}>Adicionar um novo item</h2>
           <button
             className="previous-button"
             style={{ padding: '5px 15px' }}

@@ -68,7 +68,7 @@ export const NamesOfList = styled.h2`
 const ShowItemList = keyframes`
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   } to {
     opacity: 1;
     transform: translateY(0%);
@@ -83,7 +83,7 @@ export const ItemsList = styled.ul`
   padding-top: 5px;
   flex-direction: column;
   align-items: center;
-  animation: ${ShowItemList} 750ms 950ms ease backwards;
+  animation: ${ShowItemList} 750ms 1s ease backwards;
   @media (min-width: 700px) {
     padding: 20px 18%;
   }
@@ -125,10 +125,20 @@ export const CategoryContext = styled.div`
   width: 100%;
   padding: 10px 20px;
   padding-top: 5px;
+  padding-right: 30px;
   flex-direction: row;
   align-items: center;
   overflow-x: auto;
   flex-wrap: nowrap;
+
+  @media (min-width: 700px) {
+    padding: 10px 18%;
+  }
+
+  @media (min-width: 1400px) {
+    padding-left: 30%;
+    padding-right: 30%;
+  }
   animation: ${ShowCategoryContext} 620ms 700ms ease backwards;
 `
 

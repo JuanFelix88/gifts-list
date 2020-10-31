@@ -14,6 +14,14 @@ export const Container = styled.div`
   width: 100%;
   padding: 10px 20px;
   position: relative;
+  @media (min-width: 700px) {
+    padding: 10px 18%;
+  }
+
+  @media (min-width: 1400px) {
+    padding-left: 30%;
+    padding-right: 30%;
+  }
   animation: ${ShowContainer} 650ms 850ms ease backwards;
 `
 

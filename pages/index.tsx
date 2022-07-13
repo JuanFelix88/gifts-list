@@ -17,7 +17,7 @@ import {
 import LogoLogon from '../assets/logo-logon.svg'
 
 const LinkHelp =
-  'https://api.whatsapp.com/send?phone=5541984076837&text=Ola%2C%20eu%20estou%20com%20d%C3%BAvidas%2C%20voc%C3%AA%20poderia%20me%20ajudar%3F'
+  'https://api.whatsapp.com/send?phone=554199625442&text=Ola%2C%20eu%20estou%20com%20d%C3%BAvidas%2C%20voc%C3%AA%20poderia%20me%20ajudar%3F'
 
 async function handleStorePhoneNumber(phone: string): Promise<void> {
   localStorage.setItem('@phone', phone)
@@ -49,7 +49,7 @@ const Home: React.FC = () => {
         <title>Login</title>
       </Head>
       <LogoLogon />
-      <NamesOfList>{'ROBSON & MARIA'}</NamesOfList>
+      <NamesOfList>{'NATHALIA & JOÃO'}</NamesOfList>
       <FormularyContainer onSubmit={handleOnSubmitForm}>
         <h4>Número de telefone</h4>
         <input

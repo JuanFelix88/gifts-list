@@ -27,7 +27,11 @@ export const Container = styled.div`
 `
 
 export const Header = styled.header`
-  background: linear-gradient(180deg, #faedd0 60%, rgba(250, 237, 208, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    #eeeaf7 37.5%,
+    rgba(248, 247, 255, 0) 100%
+  );
   width: 100vw;
   height: 70px;
   display: flex;

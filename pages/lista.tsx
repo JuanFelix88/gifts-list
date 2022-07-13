@@ -113,10 +113,10 @@ const ListView: React.FC = () => {
     <>
       <Container>
         <Head>
-          <title>{'Lista de Robson & Maria'}</title>
+          <title>{'Lista de NATHALIA & JOÃO'}</title>
         </Head>
         <Header>
-          <NamesOfList>{'ROBSON & MARIA'}</NamesOfList>
+          <NamesOfList>{'NATHALIA & JOÃO'}</NamesOfList>
         </Header>
         <SubHeaderOptions>
           <h2>Lista de Presentes</h2>

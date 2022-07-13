@@ -52,7 +52,7 @@ const AddList: React.FC = () => {
           <title>{'Adicionar Item'}</title>
         </Head>
         <Header>
-          <NamesOfList>{'ROBSON & MARIA'}</NamesOfList>
+          <NamesOfList>{'NATHALIA & JOÃO'}</NamesOfList>
         </Header>
         <SubHeaderOptions>
           <h2 style={{ maxWidth: 240 }}>Adicionar um novo item</h2>

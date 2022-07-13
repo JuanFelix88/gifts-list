@@ -13,7 +13,7 @@ const ShowTitleHeader = keyframes`
 
 export const Container = styled.div`
   position: fixed;
-  background-color: ${p => p.theme.colors.yellow};
+  background-color: ${p => p.theme.colors.grey};
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -66,8 +66,8 @@ export const FormularyContainer = styled.form`
 
   > input {
     margin: 5px 0px;
-    background: #f7f3e5;
-    border: 1px solid #c9c1a7;
+    background: #f6f6f6;
+    border: 1px solid #a7abc9;
     box-sizing: border-box;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.13);
     border-radius: 8px;

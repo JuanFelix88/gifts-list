@@ -77,7 +77,7 @@ const ListView: React.FC = () => {
         </Head>
         <Header>
           <Logo />
-          <NamesOfList>{'ROBSON & MARIA'}</NamesOfList>
+          <NamesOfList>{'NATHALIA & JOÃO'}</NamesOfList>
         </Header>
         <SubHeaderOptions>
           <h2>Lista de itens para remover</h2>

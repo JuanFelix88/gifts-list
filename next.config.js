@@ -5,4 +5,7 @@ module.exports =  withImages({
   devIndicators: {
     autoPrerender: false,
   },
+  env: {
+    BACKEND_URL: "https://gifts-list.herokuapp.com"
+  }
 })

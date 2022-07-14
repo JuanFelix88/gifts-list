@@ -77,7 +77,7 @@ const ListView: React.FC = () => {
       setItems(newItems)
       selectItem(n, localStorage.getItem('@phone') as string)
       toast.info(
-        'Obrigado por selecionar este item 🎉 Lembrando que a cor preferêncial para os produtos é a cor vermelha ou preta.'
+        'Obrigado por selecionar este item 🎉 Lembrando que a cor preferencial para os produtos é a cor preta ou branco.'
       )
     }
   }
